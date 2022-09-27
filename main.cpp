@@ -1,6 +1,11 @@
 #include <iostream>
+#include "linked_lists/LinkedList.h"
+#include "utils/Utils.h"
+
+using namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Utils::map_test();
+
     return 0;
 }
