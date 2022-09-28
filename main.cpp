@@ -9,6 +9,6 @@ using namespace std;
 int main() {
 //    Utils::map_test();
 //    LongestSubstringWithoutRepeatingCharacters::runner();
-    BinarySearchTree().runner();
+    binary_search_tree::runner();
     return 0;
 }

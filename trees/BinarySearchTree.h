@@ -8,6 +8,10 @@ using namespace std;
 #ifndef PRACTICE_SIMPLETREE_H
 #define PRACTICE_SIMPLETREE_H
 
+enum Traversal {
+    BFS, PREORDER, INORDER, POSTORDER
+};
+
 struct TreeNode {
     int val;
     TreeNode *left, *right;
@@ -19,22 +23,38 @@ struct TreeNode {
     }
 };
 
-class BinarySearchTree {
-private:
-    TreeNode *head = nullptr;
-public:
-    TreeNode *insertNode(int value);
+namespace binary_search_tree {
 
-    TreeNode *removeNode(int value);
+    class BinarySearchTree {
+    private:
+        TreeNode *head = nullptr;
 
-    TreeNode *findNode(int value);
+        TreeNode *insertNode(TreeNode *node, int value);
 
-    int getHeight();
+        void displayTreeBFS(TreeNode *node);
 
-    int getSize();
+        void displayTreeInorder(TreeNode *node);
+
+        void displayTreePreOrder(TreeNode *node);
+
+        void displayTreePostOrder(TreeNode *node);
+
+    public:
+        TreeNode *insertNode(int value);
+
+        TreeNode *removeNode(int value);
+
+        TreeNode *findNode(int value);
+
+        void displayTree(Traversal traversalMethod);
+
+        int getHeight();
+
+        int getSize();
+
+    };
 
     void runner();
-};
-
+}
 
 #endif //PRACTICE_SIMPLETREE_H

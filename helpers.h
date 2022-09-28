@@ -23,4 +23,9 @@ void array_input(int len, int *array) {
     }
 }
 
+class NotImplementedError : public logic_error {
+public:
+    NotImplementedError() : logic_error("Function not yet implemented") {};
+};
+
 #endif //PRACTICE_HELPERS_H
