@@ -3,6 +3,7 @@
 //
 #include "iostream"
 #include "vector"
+#include "queue"
 #include "../helpers.h"
 #include "BinarySearchTree.h"
 
@@ -52,7 +53,41 @@ int BinarySearchTree::getSize() {
 }
 
 void BinarySearchTree::displayTreeBFS(TreeNode *node) {
+    queue<pair<TreeNode *, int>> treeQueue;
+    if (node == nullptr) {
+        cout << "The tree is empty. Nothing to display!" << endl;
+        return;
+    }
 
+    int height = 1;
+    pair<TreeNode *, int> nodeHeightPair(node, height);
+    treeQueue.push(nodeHeightPair);
+
+    while (!treeQueue.empty()) {
+        nodeHeightPair = treeQueue.front();
+        treeQueue.pop();
+
+        // If node's height is greater than current height,
+        // Print on a different line
+        if (nodeHeightPair.second != height) {
+            // Height has been incremented;
+            cout << endl;
+            height++;
+        }
+        cout << nodeHeightPair.first->val << " ";
+
+        TreeNode *leftNode = nodeHeightPair.first->left;
+        if (leftNode != nullptr) {
+            pair<TreeNode *, int> newPair(leftNode, 1 + height);
+            treeQueue.push(newPair);
+        }
+
+        TreeNode *rightNode = nodeHeightPair.first->right;
+        if (rightNode != nullptr) {
+            pair<TreeNode *, int> newPair(rightNode, 1 + height);
+            treeQueue.push(newPair);
+        }
+    }
 }
 
 void BinarySearchTree::displayTreeInorder(TreeNode *node) {
@@ -92,7 +127,7 @@ void BinarySearchTree::displayTree(Traversal traversalMethod) {
 void binary_search_tree::runner() {
     cout << "============= Binary Search Tree ===============" << endl;
 
-    vector<int> elements{5, 3, 7, 9, 2, 4, 1, 8, 6, 5, 3, 10, 11};
+    vector<int> elements{5, 3, 7, 9, 2, 4, 1, 8, 6, 10, 11};
     BinarySearchTree bst = BinarySearchTree();
 
     for (int value: elements) {
@@ -102,7 +137,7 @@ void binary_search_tree::runner() {
 
     // Display Tree
     cout << "The BST is:" << endl;
-    bst.displayTree(Traversal::INORDER);
+    bst.displayTree(Traversal::BFS);
 
     // Get height of the tree
     cout << "The height of the BST is: " << bst.getHeight() << endl;
