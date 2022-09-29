@@ -36,8 +36,15 @@ TreeNode *BinarySearchTree::findNode(int value) {
     throw NotImplementedError();
 }
 
+int BinarySearchTree::getHeight(TreeNode *node) {
+    if (node == nullptr) {
+        return 0;
+    }
+    return 1 + max(getHeight(node->left), getHeight(node->right));
+}
+
 int BinarySearchTree::getHeight() {
-    throw NotImplementedError();
+    return getHeight(this->head);
 }
 
 int BinarySearchTree::getSize() {
@@ -85,7 +92,7 @@ void BinarySearchTree::displayTree(Traversal traversalMethod) {
 void binary_search_tree::runner() {
     cout << "============= Binary Search Tree ===============" << endl;
 
-    vector<int> elements{5, 3, 7, 9, 2, 4, 1, 8};
+    vector<int> elements{5, 3, 7, 9, 2, 4, 1, 8, 6, 5, 3, 10, 11};
     BinarySearchTree bst = BinarySearchTree();
 
     for (int value: elements) {
@@ -93,6 +100,10 @@ void binary_search_tree::runner() {
         bst.insertNode(value);
     }
 
+    // Display Tree
     cout << "The BST is:" << endl;
     bst.displayTree(Traversal::INORDER);
+
+    // Get height of the tree
+    cout << "The height of the BST is: " << bst.getHeight() << endl;
 }

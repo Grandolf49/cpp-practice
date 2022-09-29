@@ -16,7 +16,7 @@ struct TreeNode {
     int val;
     TreeNode *left, *right;
 
-    TreeNode(int val) {
+    explicit TreeNode(int val) {
         this->val = val;
         left = nullptr;
         right = nullptr;
@@ -30,6 +30,8 @@ namespace binary_search_tree {
         TreeNode *head = nullptr;
 
         TreeNode *insertNode(TreeNode *node, int value);
+
+        int getHeight(TreeNode *node);
 
         void displayTreeBFS(TreeNode *node);
 
