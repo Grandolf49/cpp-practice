@@ -21,16 +21,20 @@ void MaxHeap::swap(int *a, int *b) {
 void MaxHeap::heapifyDelete(unsigned idx_parent) {
     unsigned idx_left_child = 2 * idx_parent;
     unsigned idx_right_child = idx_left_child + 1;
+    cout << "parent idx: " << idx_parent << " left idx: " << idx_left_child << " right idx: " << idx_right_child
+         << "\n";
 
     // If idx_parent is a leaf node, return
-    if (idx_left_child >= this->size() || idx_right_child >= this->size())
+    if (idx_left_child >= this->size() || idx_right_child >= this->size()) {
+        cout << "lead node\n";
         return;
+    }
 
     int parent = this->heapArray[idx_parent];
     // If idx_parent is not a leaf node, it will always have a left child
     int left_child = this->heapArray[idx_left_child];
     // If idx_parent is not a leaf node, it may or may not have a right child
-    int right_child = idx_right_child >= this->size() ? INT_MIN : this->heapArray[idx_left_child];
+    int right_child = idx_right_child >= this->size() ? INT_MIN : this->heapArray[idx_right_child];
 
     unsigned idx_max_child = idx_left_child;
     int max_child = left_child;
@@ -40,6 +44,8 @@ void MaxHeap::heapifyDelete(unsigned idx_parent) {
     }
 
     // Compare parent with left and right children
+    cout << "parent: " << parent << " left: " << left_child << " right: " << right_child << " max: " << max_child
+         << "\n";
     if (parent < max_child) {
         // Swap parent with max child
         swap(&this->heapArray[idx_parent], &this->heapArray[idx_max_child]);
@@ -72,20 +78,20 @@ void MaxHeap::insertElement(int n) {
 }
 
 int MaxHeap::deleteElement() {
-    if (this->heapArray.empty())
+    if (this->size() == 0)
         return INT_MIN;
 
     // Return first element of the heap
-    int element = this->heapArray[0];
+    int element = this->heapArray[1];
 
     // Copy last element to the root
-    this->heapArray[0] = this->heapArray.back();
+    this->heapArray[1] = this->heapArray.back();
 
     // Delete last element
     this->heapArray.pop_back();
 
     // Call heapifyDelete (top down) to rearrange elements
-    heapifyDelete(0);
+    heapifyDelete(1);
 
     return element;
 }
@@ -99,11 +105,9 @@ void MaxHeap::printHeap() {
 }
 
 void max_heap::runner() {
-    cout << "======== Max Heap ========\n";
-
     vector<int> elements = {
-//            6, 3, 4, 8, 1, 9, 2, 7, 5
-            1, 2, 3, 4, 5, 6, 7, 8, 9
+            6, 3, 4, 8, 1, 9, 2, 7, 5
+//            1, 2, 3, 4, 5, 6, 7, 8, 9
     };
     MaxHeap maxHeap = MaxHeap();
 
@@ -112,12 +116,15 @@ void max_heap::runner() {
         cout << "Inserting " << i << " into max heap\n";
         maxHeap.insertElement(i);
         maxHeap.printHeap();
+        cout << "\n";
     }
 
-//    cout << "======= Deletion ======\n";
-//    for (int i = 0; i < maxHeap.size(); i++) {
-//        cout << "Deleting " << i << "th element from max heap\n";
-//        maxHeap.deleteElement();
-//        maxHeap.printHeap();
-//    }
+    cout << "======= Deletion ======\n";
+    unsigned heapSize = maxHeap.size();
+    for (int i = 0; i < heapSize; i++) {
+        cout << "Deleting " << (i + 1) << "th element from max heap\n";
+        maxHeap.deleteElement();
+        maxHeap.printHeap();
+        cout << "\n";
+    }
 }
