@@ -132,16 +132,16 @@ public:
         return minCost;
     }
 };
-
-int main() {
-    Solution solution = Solution();
-    vector<vector<int>> points = {
-            {0, 0},
-            {2, 2},
-            {3, 10},
-            {5, 2},
-            {7, 0}
-    };
-    int minCost = solution.minCostConnectPoints(points);
-    cout << minCost << endl;
-}
+//
+//int main() {
+//    Solution solution = Solution();
+//    vector<vector<int>> points = {
+//            {0, 0},
+//            {2, 2},
+//            {3, 10},
+//            {5, 2},
+//            {7, 0}
+//    };
+//    int minCost = solution.minCostConnectPoints(points);
+//    cout << minCost << endl;
+//}
